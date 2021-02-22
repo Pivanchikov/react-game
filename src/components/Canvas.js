@@ -1,29 +1,32 @@
 import React,  { Component } from 'react'
 
-import birdConfig from '../config/bird'
-import gameConfig from '../config/game'
+import Bird from './Bird'
+import Game from './Game'
+import Pipes from './Pipes';
 
 class CanvasCreator extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {
-         birdConfig,
-         gameConfig
-        };
-
         this.canvasRef = React.createRef();
         this.ctx = null;
+        this.bird = '';
+        this.game = '';
+        this.pipes = '';
       }
     
     componentDidMount = () => {
       this.createCanvas()
-      this.flyBird();
+      this.game.drawBg()
+      this.bird.drawBird()
+      
+      this.canvasRef.current.addEventListener('click', () => {
+        this.bird.fallBird()
+        this.draw()
+      })
 
-      this.canvasRef.current.addEventListener('click', () => this.fallBird())
-      document.addEventListener('keydown', () => this.upBird() )
-
+      document.addEventListener('keydown', () => this.bird.upBird() )
     }
 
     createCanvas = () => {
@@ -31,46 +34,24 @@ class CanvasCreator extends Component {
       let canvas = this.canvasRef.current
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
-      this.ctx.imageSmoothingEnabled = false;
-      this.ctx.mozImageSmoothingEnabled = false;
-      this.ctx.webkitImageSmoothingEnabled = false;
-      this.ctx.msImageSmoothingEnabled = false;
-      this.ctx.imageSmoothingEnabled = false;
+
+      this.bird = new Bird (this.ctx);
+      this.game = new Game (this.ctx);
+      this.pipes = new Pipes (this.ctx);
     }
-  
-   drawBird(){
-      const Config = this.state.birdConfig;
-      const Bird = new Image();
-        Bird.src = Config.imageFirst;
-        Bird.onload = () => this.ctx.drawImage(Bird, Config.x, Config.y)
 
-     setTimeout(() => {
-        Bird.src = Config.imageSecond;
-        Bird.onload = () => this.ctx.drawImage(Bird, Config.x, Config.y)
-      }, 0)
-       setTimeout(() => {
-        Bird.src = Config.imageThird;
-      Bird.onload = () => this.ctx.drawImage(Bird, Config.x, Config.y)
-      }, 5)
-  }
+    draw() {
 
-  flyBird(){
-    setInterval(()=> {
-      this.drawBird()
-    }, 20)
-  }
-  fallBird(){
-    setInterval(()=> {
-      this.state.birdConfig.y = this.state.birdConfig.y + 3
-      this.drawBird()
-      this.ctx.clearRect(0, 0, this.canvasRef.current.width, this.canvasRef.current.height)
+      const start = () => {
+        this.game.drawBg()
+        this.pipes.drawPipes()
+        this.bird.drawBird()
+        requestAnimationFrame(start)
+        }
+        
+      start()
+    }
 
-    }, 20)
-  }
-
-  upBird(){
-    this.state.birdConfig.y = this.state.birdConfig.y - 60
-  }
     render() {
         return (
                 <canvas
