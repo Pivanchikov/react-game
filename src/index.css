@@ -1,0 +1,15 @@
+*{
+  margin: 0;
+  padding: 0;
+
+}
+
+
+
+canvas {
+  position: absolute; 
+  left: 0; 
+  top: 0;
+  background: no-repeat  url('bg.png');
+  background-size: 100vw 100vh;
+}
