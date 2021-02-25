@@ -7,7 +7,9 @@ class Pipes {
         }
         this.ctx = props;
         this.pipeDown = '';
+        this.scor= 0
     }
+    
     drawPipes() {
         const Pipes = this.state.pipeConfig.pipes;
         for (let i = 0; i < Pipes.length; i++) {
@@ -22,7 +24,21 @@ class Pipes {
             y: Math.floor(Math.random() * this.pipeDown.height) - this.pipeDown.height
             })
         }
+        this.score(Pipes[i].x)
         }
+      
+    }
+    
+      score(x) {
+        if (x == 40) {
+          this.scor++
+        }
+      }
+
+    drawScore(x, y) {
+    this.ctx.fillStyle = '#000'
+    this.ctx.font = "20px verdana"
+    this.ctx.fillText(`Score: ${this.scor}`, 40, window.innerHeight - 40)
     }
 
     drawPipeDown(x, y) {

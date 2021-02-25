@@ -11,8 +11,8 @@ class Bird {
     drawBird = () => {
         const Config = this.state.birdConfig;
         const Bird = new Image();
-          Bird.src = Config.imageFirst;
-          Bird.onload = () => this.ctx.drawImage(Bird, Config.x, Config.y)
+              Bird.src = Config.imageFirst;
+              Bird.onload = () => this.ctx.drawImage(Bird, Config.x, Config.y)
     }
   
     fallBird = () =>{
