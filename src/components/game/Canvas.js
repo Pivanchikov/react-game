@@ -27,7 +27,11 @@ class CanvasCreator extends Component {
         this.draw()
       })
 
-      document.addEventListener('keydown', () => this.bird.upBird() )
+      document.addEventListener('keydown', (event) => {
+        if (event.keyCode === 32) {
+          this.bird.upBird()
+        }
+      })
     }
 
     createCanvas = () => {

@@ -1,4 +1,4 @@
-import pipeConfig from '../config/pipe'
+import pipeConfig from '../../config/pipe'
 
 class Pipes {
     constructor(props) {

@@ -1,4 +1,4 @@
-import birdConfig from '../config/bird'
+import birdConfig from '../../config/bird'
 
 class Bird {
     constructor(props) {

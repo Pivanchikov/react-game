@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import CanvasCreator from './components/Canvas'
+import App from './components/App'
 
 ReactDOM.render(
   <React.StrictMode>
-    <CanvasCreator />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

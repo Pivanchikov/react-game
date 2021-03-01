@@ -1,4 +1,4 @@
-import gameConfig from '../config/game'
+import gameConfig from '../../config/game'
 
 
 class Game {
