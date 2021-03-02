@@ -1,7 +1,8 @@
 import React,  { Component } from 'react'
 
 import Bird from './Bird'
-import Game from './Game'
+import Background from './Background'
+import Ground from './Ground'
 import Pipes from './Pipes';
 import FinishGame from './FinishGame'
 
@@ -15,7 +16,8 @@ class CanvasCreator extends Component {
         this.canvasRef = React.createRef();
         this.ctx = null;
         this.bird = '';
-        this.game = '';
+        this.background = '';
+        this.ground = '';
         this.pipes = '';
         this.req = ''
       }
@@ -24,7 +26,8 @@ class CanvasCreator extends Component {
       
       if (!this.state.toggle) {
         this.createCanvas()
-      this.game.drawBg()
+      this.background.drawBg()
+      this.ground.drawGround()
       this.bird.drawBird()
       
       this.canvasRef.current.addEventListener('click', () => {
@@ -47,22 +50,26 @@ class CanvasCreator extends Component {
           canvas.height = window.innerHeight;
 
       this.bird = new Bird (this.ctx);
-      this.game = new Game (this.ctx);
+      this.background = new Background (this.ctx);
+      this.ground = new Ground (this.ctx);
+
       this.pipes = new Pipes (this.ctx);
+      
     }
   
     draw() {
       const birdsConfig = this.bird.state.birdConfig;
       const start = () => {
-        this.game.drawBg()
+        this.background.drawBg()
         this.pipes.drawPipes(birdsConfig.y, this.req)
         this.pipes.drawScore()
         this.bird.drawBird()
+        this.ground.drawGround()
         this.req = requestAnimationFrame(start) 
 
         this.pipes.state.pipeConfig.pipes.forEach(pipe => {
           if (
-              birdsConfig.y + 40 >= window.innerHeight ||
+              birdsConfig.y + 40 >= window.innerHeight - window.innerHeight*0.15 ||
               birdsConfig.y + 40 <= 0 ||
               pipe.x >= 0 && pipe.x <= 52 &&
              ( birdsConfig.y + 40 < pipe.y + 242 ||

@@ -1,7 +1,7 @@
 import gameConfig from '../../config/game'
 
 
-class Game {
+class Background {
     constructor( ctx ) {
         this.state ={
             gameConfig,
@@ -18,4 +18,4 @@ class Game {
 
 }
 
-export default Game
+export default Background

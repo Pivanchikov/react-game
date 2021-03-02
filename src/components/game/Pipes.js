@@ -16,7 +16,7 @@ class Pipes {
         
         this.drawPipeDown(Pipes[i].x, Pipes[i].y)
         this.drawPipeUp(Pipes[i].x, Pipes[i].y+this.getGap())
-        Pipes[i].x--
+        Pipes[i].x = Pipes[i].x-2
 
         if ( Pipes[i].x == Math.floor(window.innerWidth*.8) ) {
             Pipes.push({
@@ -50,7 +50,7 @@ class Pipes {
     drawPipeUp(x, y) {
         const pipeUp = new Image()
             pipeUp.src = this.state.pipeConfig.pipeUp
-        const height = window.innerHeight - y
+        const height = window.innerHeight - (window.innerHeight*0.15 + y)
         this.ctx.drawImage(pipeUp, x, y, 52, height)
     }
 
