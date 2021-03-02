@@ -3,12 +3,15 @@ import React,  { Component } from 'react'
 import Bird from './Bird'
 import Game from './Game'
 import Pipes from './Pipes';
+import FinishGame from './FinishGame'
 
 class CanvasCreator extends Component {
 
     constructor(props) {
         super(props);
-
+        this.state = {
+          toggle: false 
+        }
         this.canvasRef = React.createRef();
         this.ctx = null;
         this.bird = '';
@@ -18,7 +21,9 @@ class CanvasCreator extends Component {
       }
     
     componentDidMount = () => {
-      this.createCanvas()
+      
+      if (!this.state.toggle) {
+        this.createCanvas()
       this.game.drawBg()
       this.bird.drawBird()
       
@@ -32,6 +37,7 @@ class CanvasCreator extends Component {
           this.bird.upBird()
         }
       })
+      }
     }
 
     createCanvas = () => {
@@ -63,20 +69,20 @@ class CanvasCreator extends Component {
                birdsConfig.y + 40 > pipe.y + 342)
               ){
                 cancelAnimationFrame(this.req);
-                window.location.reload()
+                this.setState({toggle: true})
+                // window.location.reload()
               }
 
         });
-       
         }
       start()
     }
 
     render() {
         return (
-                <canvas
-                    ref={this.canvasRef} 
-                />
+          this.state.toggle 
+                ? <FinishGame score={this.pipes.scor} /> 
+                : <canvas ref={this.canvasRef} />
         )
     }
         

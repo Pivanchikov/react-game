@@ -1,11 +1,18 @@
 import { Button, Container } from '@material-ui/core';
+import { useState } from 'react'
+import  Records from './game/Records'
 
 export default function StartMenu(props) {
+    const [toggle, setToggle] = useState(true);
+
+    const changeToggle= (event) => {
+        setToggle(!toggle)
+    }
 
    const onSetFullScreen = () => document.documentElement.requestFullscreen();
 
     return (
-        <div>
+       toggle ? <div>
             <Container maxWidth="sm" style={{ textAlign: "center"}}>
                 <header>
                     <h1>
@@ -18,7 +25,7 @@ export default function StartMenu(props) {
                     onClick={() => { props.UpdateState()}}>
                         Начать игру
                     </Button>
-                    <Button variant="contained">Рекорды</Button>
+                    <Button variant="contained" onClick={changeToggle}>Рекорды</Button>
                     <br />
                     <Button variant="contained" onClick={() => onSetFullScreen()} style={{ marginTop: "10px"}}>На весь экран</Button>
                 </main>
@@ -35,6 +42,7 @@ export default function StartMenu(props) {
                     </a>
                 </footer>
         </div>
+        : <Records />
 
     )
 }
