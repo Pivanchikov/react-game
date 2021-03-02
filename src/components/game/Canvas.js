@@ -70,7 +70,6 @@ class CanvasCreator extends Component {
               ){
                 cancelAnimationFrame(this.req);
                 this.setState({toggle: true})
-                // window.location.reload()
               }
 
         });

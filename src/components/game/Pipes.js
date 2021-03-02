@@ -50,7 +50,8 @@ class Pipes {
     drawPipeUp(x, y) {
         const pipeUp = new Image()
             pipeUp.src = this.state.pipeConfig.pipeUp
-        this.ctx.drawImage(pipeUp, x, y)
+        const height = window.innerHeight - y
+        this.ctx.drawImage(pipeUp, x, y, 52, height)
     }
 
     getGap() {
