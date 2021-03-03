@@ -6,4 +6,5 @@ export default {
       }],
     pipeDown: './image/pipeDown.png',
     pipeUp: './image/pipeUp.png',
+    speed: 2
 }

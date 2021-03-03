@@ -16,9 +16,9 @@ class Pipes {
         
         this.drawPipeDown(Pipes[i].x, Pipes[i].y)
         this.drawPipeUp(Pipes[i].x, Pipes[i].y+this.getGap())
-        Pipes[i].x = Pipes[i].x-2
-
-        if ( Pipes[i].x == Math.floor(window.innerWidth*.8) ) {
+        Pipes[i].x = Pipes[i].x-pipeConfig.speed
+            
+        if ( Pipes[i].x == Math.floor(window.innerWidth*.8 )) {
             Pipes.push({
             x: window.innerWidth,
             y: Math.floor(Math.random() * this.pipeDown.height) - this.pipeDown.height

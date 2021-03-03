@@ -3,7 +3,7 @@ import { Typography, Grid, Slider } from '@material-ui/core';
 import {VolumeUp, VolumeOff } from '@material-ui/icons';
 
 import { useState } from 'react'
-
+import GamesConfig from '../../config/gamesConfig'
 
 const useStyles = makeStyles({
     root: {
@@ -13,13 +13,16 @@ const useStyles = makeStyles({
   });
 
 export default function Sound(props) {
+    
     const classes = useStyles();
-    const [sound, setSound] = useState(0);
-
+    const [sound, setSound] = useState(GamesConfig.sound);
     const handleChangeSound = (event, newValue) => {
         setSound(newValue);
     };
 
+    if(props.save){
+        GamesConfig.sound = sound
+    }
     return (
         <div className={classes.root}>
                 <Typography id="continuous-slider" gutterBottom>
@@ -30,7 +33,7 @@ export default function Sound(props) {
                         <VolumeOff />
                     </Grid>
                     <Grid item xs>
-                        <Slider aria-labelledby="continuous-slider" />
+                        <Slider value={sound} onChange={handleChangeSound} aria-labelledby="continuous-slider" />
                     </Grid>
                     <Grid item>
                         <VolumeUp />

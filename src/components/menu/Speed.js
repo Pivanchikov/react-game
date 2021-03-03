@@ -1,8 +1,11 @@
 import { useState } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Container, Typography, Grid, Slider, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
+import { Typography, Grid, Slider} from '@material-ui/core';
 import { Speed } from '@material-ui/icons';
+import pipeConfig from '../../config/pipe'
+
+
 
 const useStyles = makeStyles({
     root: {
@@ -25,14 +28,17 @@ const useStyles = makeStyles({
     },
   });
 
-  export default function Speeds() {
+  export default function Speeds(props) {
     const classes = useStyles();
-    const [speed, setSpeed] = useState(5);
+    const [speed, setSpeed] = useState(pipeConfig.speed);
 
     const handleChangeSpeed = (event, newValue) => {
         setSpeed(newValue);
     };
 
+    if(props.save){
+        pipeConfig.speed = speed
+    }
 
     return (
     <div className={classes.root}>
@@ -44,7 +50,7 @@ const useStyles = makeStyles({
                 <Speed />
             </Grid>
             <Grid item xs>
-                <Slider value={speed} onChange={handleChangeSpeed} aria-labelledby="continuous-slider" max={10} />
+                <Slider value={speed} onChange={handleChangeSpeed} aria-labelledby="continuous-slider" min={0.1} max={2} />
             </Grid>
             <Grid item>
                 <Speed />

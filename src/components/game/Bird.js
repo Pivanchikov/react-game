@@ -1,3 +1,4 @@
+import pipeConfig from '../../config/pipe'
 import birdConfig from '../../config/bird'
 
 class Bird {
@@ -8,16 +9,18 @@ class Bird {
         this.ctx = props
     }
 
-    drawBird = (src = this.state.birdConfig.imageFirst) => {
+    drawBird = () => {
+      console.log(this.state.birdConfig.bird)
         const Config = this.state.birdConfig;
         const Bird = new Image();
-              Bird.src = src;
+              Bird.src = this.state.birdConfig.bird;
+              console.log(Bird.src)
               Bird.onload = () => this.ctx.drawImage(Bird, Config.x, Config.y)
     }
   
     fallBird = () =>{
       setInterval(()=> {
-        this.state.birdConfig.y = this.state.birdConfig.y + 1.5
+        this.state.birdConfig.y = this.state.birdConfig.y + pipeConfig.speed
       }, 20)
     }
   

@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles';
 import { RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
+import BirdConfig from '../../config/bird'
 
 const useStyles = makeStyles({
     group: {
@@ -16,20 +17,22 @@ const useStyles = makeStyles({
     }
   });
 
-export default function Birds() {
+export default function Birds(props) {
     const classes = useStyles();
-    const [bird, setBird] = useState('firstBird');
+    const [bird, setBird] = useState(BirdConfig.bird);
 
     
     const handleChangeBird = (event) => {
         setBird(event.target.value);
     };
-
+    if(props.save){
+        BirdConfig.bird = bird
+    }
     return (
     <RadioGroup aria-label="bird" name="bird" value={bird} onChange={handleChangeBird} className={classes.group}>
-        <FormControlLabel value="firstBird" control={<Radio />} className={classes.radio} />
+        <FormControlLabel value='./image/bird.png'  control={<Radio />} className={classes.radio} />
         <img src={ require('../../image/birdFirst.png').default } style={{width: 50}}/>
-        <FormControlLabel value="secondBird" control={<Radio />} className={classes.radio} />
+        <FormControlLabel value='./image/bird2.png' control={<Radio />} className={classes.radio} />
         <img src={ require('../../image/birdSecond.png').default } style={{width: 50}}/>
     </RadioGroup>
     )

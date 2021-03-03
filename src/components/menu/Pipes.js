@@ -2,6 +2,9 @@ import { useState } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles';
 import { RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
+import pipeConfig from '../../config/pipe'
+
+
 
 const useStyles = makeStyles({
     group: {
@@ -19,19 +22,27 @@ const useStyles = makeStyles({
     }
   });
 
-export default function Pipes() {
+export default function Pipes(props) {
     const classes = useStyles();
-    const [pipe, setPipe] = useState('firstPipe');
+    const [pipe, setPipe] = useState(pipeConfig.pipeUp);
 
     const handleChangePipe = (event) => {
         setPipe(event.target.value);
     };
 
+    if(props.save){
+        pipeConfig.pipeUp = pipe
+        
+        pipe === "./image/pipeUp.png" 
+                ?  pipeConfig.pipeDown = "./image/pipeDown.png"
+                :  pipeConfig.pipeDown = "./image/pipeDown2.png"
+
+    }
     return (
         <RadioGroup aria-label="pipes" name="pipes" value={pipe} onChange={handleChangePipe} className={classes.group}>
-            <FormControlLabel value="firstPipe" control={<Radio />} className={classes.radio} />
+            <FormControlLabel value="./image/pipeUp.png" control={<Radio />} className={classes.radio} />
             <img src={ require('../../image/pipeUp1.png').default } className={classes.image}/>
-            <FormControlLabel value="secondPipe" control={<Radio />} className={classes.radio} />
+            <FormControlLabel value="./image/pipeUp2.png" control={<Radio />} className={classes.radio} />
             <img src={ require('../../image/pipeUp2.png').default } className={classes.image}/>
         </RadioGroup>
     )

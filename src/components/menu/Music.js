@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid, Slider } from '@material-ui/core';
 import { VolumeUp, VolumeOff } from '@material-ui/icons';
+import GamesConfig from '../../config/gamesConfig'
+
 
 const useStyles = makeStyles({
     root: {
@@ -11,13 +13,17 @@ const useStyles = makeStyles({
     }
   });
 
-export default function Music(){
+export default function Music(props){
     const classes = useStyles();
-    const [music, setMusic] = useState(30);
+    const [music, setMusic] = useState(GamesConfig.music);
 
     const handleChangeMusic = (event, newValue) => {
             setMusic(newValue);
         };
+    
+        if(props.save){
+            GamesConfig.music = music
+        }
 
     return (
         <div className={classes.root}>
