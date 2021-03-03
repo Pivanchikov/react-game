@@ -1,3 +1,3 @@
 # react-game
 Flappy bird 
-https://frosty-hypatia-16043e.netlify.app/
+https://pivanchikov-react-game.netlify.app/
